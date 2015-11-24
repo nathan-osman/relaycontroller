@@ -37,7 +37,7 @@ func main() {
 
 	// Create the server and bind to the specified port
 	log.Print("Starting server...")
-	server := NewServer(config.Addr, channels)
+	server := NewServer(&config.Server, channels)
 	if err := server.Start(); err != nil {
 		log.Fatal(err)
 	}

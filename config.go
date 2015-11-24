@@ -7,7 +7,7 @@ import (
 
 // Application configuration.
 type Config struct {
-	Addr     string          `json:"addr"`
+	Server   ServerConfig    `json:"server"`
 	Channels []ChannelConfig `json:"channels"`
 }
 

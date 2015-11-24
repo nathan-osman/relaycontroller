@@ -2,7 +2,15 @@ package main
 
 import (
 	"github.com/hectane/go-asyncserver"
+
+	"net/http"
 )
+
+// Configuration for the server.
+type ServerConfig struct {
+	Addr string `json:"addr"`
+	Root string `json:"root"`
+}
 
 // HTTP server providing the web interface and API.
 type Server struct {
@@ -11,11 +19,15 @@ type Server struct {
 }
 
 // Create a new server instance.
-func NewServer(addr string, channels []*Channel) *Server {
-	return &Server{
-		server:   server.New(addr),
+func NewServer(config *ServerConfig, channels []*Channel) *Server {
+	s := &Server{
+		server:   server.New(config.Addr),
 		channels: channels,
 	}
+	m := http.NewServeMux()
+	m.Handle("/", http.FileServer(http.Dir(config.Root)))
+	s.server.Handler = m
+	return s
 }
 
 // Start the server.

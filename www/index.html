@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Relay Controller</title>
+
+        <!-- CSS Files -->
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <!-- Page Template -->
+        <script type="text/x-handlebars">
+            <main>
+                <h1>Relay Controller</h1>
+                {{outlet}}
+            </main>
+        </script>
+
+        <!-- Home Page -->
+        <script type="text/x-handlebars" data-template-name="index">
+            <p>Use the web interface to configure and interact with the relay in real time.</p>
+            <table class="channels">
+                <tbody>
+                    {{#each model as |ch|}}
+                        {{channel-switch title=ch.title state=ch.state}}
+                    {{/each}}
+                </tbody>
+            </table>
+        </script>
+
+        <!-- Channel Switch Component -->
+        <script type="text/x-handlebars" data-template-name="components/channel-switch">
+            <td>
+                {{title}}
+            </td>
+            <td class="switch">
+                <div class="state {{if state '' 'active'}}">OFF</div><div class="state {{if state 'active' ''}}">ON</div>
+            </td>
+        </script>
+
+        <!-- JS Files -->
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/ember-template-compiler.min.js"></script>
+        <script src="/js/ember.min.js"></script>
+        <script src="/js/app.js"></script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+/**
+ * Relay Controller
+ * Copyright 2015 - Nathan Osman
+ */
+
+@font-face {
+    font-family: "Source Sans Pro Regular";
+    src: url('../fonts/sourcesanspro-regular-webfont.eot');
+    src: url('../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/sourcesanspro-regular-webfont.woff2') format('woff2'),
+         url('../fonts/sourcesanspro-regular-webfont.woff') format('woff'),
+         url('../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'),
+         url('../fonts/sourcesanspro-regular-webfont.svg#source_sans_proregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #eeeee5;
+    font-family: "Source Sans Pro Regular" sans-serif;
+    margin: 0;
+}
+
+h1 {
+    font-size: 24pt;
+    margin-top: 0;
+    text-align: center;
+}
+
+main {
+    background-color: #fff;
+    border: 2px solid #999;
+    max-width: 400px;
+    margin: 16px auto;
+    padding: 8px;
+}
+
+.channels {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.channels tr:nth-child(odd) {
+    background-color: #eee;
+}
+
+.channels td {
+    padding: 8px;
+}
+
+.channels .switch {
+    text-align: right;
+}
+
+.channels .switch .state {
+    background-color: #ccc;
+    color: #999;
+    cursor: pointer;
+    display: inline-block;
+    padding: 8px;
+}
+
+.channels .switch .state.active {
+    background-color: #07a;
+    color: #fff;
+}

@@ -71,9 +71,9 @@ func NewServer(config *ServerConfig, channels []*Channel) *Server {
 		channels: channels,
 	}
 	r := mux.NewRouter()
-	r.Handle("/", http.FileServer(http.Dir(config.Root)))
 	r.HandleFunc("/api/channels", s.channelsHandler).Methods("GET")
 	r.HandleFunc("/api/channels/{name}", s.channelHandler).Methods("PUT")
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir(config.Root)))
 	s.server.Handler = r
 	return s
 }

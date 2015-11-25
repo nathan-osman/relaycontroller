@@ -17,6 +17,7 @@ App.ChannelSwitchComponent = Ember.Component.extend({
         $.ajax({
             type: 'PUT',
             url: '/api/channels/' + this.get('name'),
+            contentType: 'application/json',
             data: JSON.stringify({
                 state: this.get('state')
             })

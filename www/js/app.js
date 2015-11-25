@@ -7,26 +7,21 @@ App = Ember.Application.create();
 
 App.IndexRoute = Ember.Route.extend({
     model: function() {
-        return [
-            {
-                'title': 'Item 1',
-                'state': true
-            },
-            {
-                'title': 'Item 2',
-                'state': false
-            },
-            {
-                'title': 'Item 3',
-                'state': false
-            }
-        ];
+        return $.get('/api/channels');
     }
 })
 
 App.ChannelSwitchComponent = Ember.Component.extend({
     tagName: 'tr',
     click: function() {
-        this.set('state', !this.get('state'));
+        $.ajax({
+            type: 'PUT',
+            url: '/api/channels/' + this.get('name'),
+            data: JSON.stringify({
+                state: this.get('state')
+            })
+        }).then(function(response) {
+            this.set('state', response.state);
+        });
     }
 });

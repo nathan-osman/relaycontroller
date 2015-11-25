@@ -15,7 +15,7 @@ type ChannelConfig struct {
 
 // Controller for a specific channel.
 type Channel struct {
-	Config *ChannelConfig
+	Config ChannelConfig
 	pin    *rpi.Pin
 	state  bool
 }
@@ -31,7 +31,7 @@ func NewChannel(config *ChannelConfig) (*Channel, error) {
 		return nil, err
 	}
 	return &Channel{
-		Config: config,
+		Config: *config,
 		pin:    p,
 	}, nil
 }

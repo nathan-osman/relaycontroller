@@ -14,15 +14,16 @@ App.IndexRoute = Ember.Route.extend({
 App.ChannelSwitchComponent = Ember.Component.extend({
     tagName: 'tr',
     click: function() {
+        var self = this;
         $.ajax({
             type: 'PUT',
-            url: '/api/channels/' + this.get('name'),
+            url: '/api/channels/' + this.get('channel').name,
             contentType: 'application/json',
             data: JSON.stringify({
-                state: this.get('state')
+                state: !this.get('channel').state
             })
         }).then(function(response) {
-            this.set('state', response.state);
+            self.set('channel', response);
         });
     }
 });

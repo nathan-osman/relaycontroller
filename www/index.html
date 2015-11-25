@@ -23,8 +23,8 @@
             <p>Use the web interface to configure and interact with the relay in real time.</p>
             <table class="channels">
                 <tbody>
-                    {{#each model as |ch|}}
-                        {{channel-switch title=ch.title state=ch.state}}
+                    {{#each model as |channel|}}
+                        {{channel-switch channel=channel}}
                     {{/each}}
                 </tbody>
             </table>
@@ -33,10 +33,10 @@
         <!-- Channel Switch Component -->
         <script type="text/x-handlebars" data-template-name="components/channel-switch">
             <td>
-                {{title}}
+                {{channel.title}}
             </td>
             <td class="switch">
-                <div class="state {{if state '' 'active'}}">OFF</div><div class="state {{if state 'active' ''}}">ON</div>
+                <div class="state {{if channel.state '' 'active'}}">OFF</div><div class="state {{if channel.state 'active' ''}}">ON</div>
             </td>
         </script>
 

@@ -2,6 +2,8 @@ package main
 
 import (
 	"github.com/nathan-osman/go-rpigpio"
+
+	"encoding/json"
 )
 
 // Configuration for a channel.
@@ -13,7 +15,7 @@ type ChannelConfig struct {
 
 // Controller for a specific channel.
 type Channel struct {
-	config *ChannelConfig
+	Config *ChannelConfig
 	pin    *rpi.Pin
 	state  bool
 }
@@ -29,13 +31,38 @@ func NewChannel(config *ChannelConfig) (*Channel, error) {
 		return nil, err
 	}
 	return &Channel{
-		config: config,
+		Config: config,
 		pin:    p,
 	}, nil
 }
 
-//...
+// Generate a JSON representation of the channel.
+func (c *Channel) MarshalJSON() ([]byte, error) {
+	v := map[string]interface{}{
+		"name":  c.Config.Name,
+		"title": c.Config.Title,
+		"state": c.state,
+	}
+	return json.Marshal(v)
+}
 
+// Apply the provided JSON to the channel. Only state may be set.
+func (c *Channel) UnmarshalJSON(data []byte) error {
+	var v struct {
+		State bool `json:"state"`
+	}
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	if v.State {
+		c.pin.Write(rpi.HIGH)
+	} else {
+		c.pin.Write(rpi.LOW)
+	}
+	return nil
+}
+
+// Close the channel.
 func (c *Channel) Close() {
 	c.pin.Close()
 }

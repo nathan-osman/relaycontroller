@@ -54,11 +54,16 @@ func (c *Channel) UnmarshalJSON(data []byte) error {
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
+	var value rpi.Value
 	if v.State {
-		c.pin.Write(rpi.HIGH)
+		value = rpi.HIGH
 	} else {
-		c.pin.Write(rpi.LOW)
+		value = rpi.LOW
 	}
+	if err := c.pin.Write(value); err != nil {
+		return err
+	}
+	c.state = v.State
 	return nil
 }
 

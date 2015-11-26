@@ -44,6 +44,10 @@ main {
     width: 100%;
 }
 
+.channels tr {
+    cursor: pointer;
+}
+
 .channels tr:nth-child(odd) {
     background-color: #eee;
 }
@@ -59,7 +63,6 @@ main {
 .channels .switch .state {
     background-color: #ccc;
     color: #999;
-    cursor: pointer;
     display: inline-block;
     padding: 8px;
 }

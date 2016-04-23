@@ -14,13 +14,13 @@
         <script type="text/x-handlebars">
             <main>
                 <h1>Relay Controller</h1>
+                <p>Use the web interface below to interact with the relay in real time.</p>
                 {{outlet}}
             </main>
         </script>
 
         <!-- Home Page -->
         <script type="text/x-handlebars" data-template-name="index">
-            <p>Use the web interface to configure and interact with the relay in real time.</p>
             <table class="channels">
                 <tbody>
                     {{#each model as |channel|}}
